@@ -1,8 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import contactReducer from "../features/forms/contactSlice";
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    contact: contactReducer,
   },
 });

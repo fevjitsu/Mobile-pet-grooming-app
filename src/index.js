@@ -1,18 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import store from './app/store';
-import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
-
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import Mobile from "./Mobile";
+import store from "./app/store";
+import { Provider } from "react-redux";
+import * as serviceWorker from "./serviceWorker";
+import "./index.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init();
+const micron = require("webkul-micron");
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      {window.screen.width > 600 ? <App /> : <Mobile />}
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
