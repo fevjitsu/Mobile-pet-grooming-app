@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import isEmail from "validator/lib/isEmail";
 import isMobilePhone from "validator/lib/isMobilePhone";
 import Recaptcha from "react-recaptcha";
+import Modal from "react-modal";
 import styles from "./Contact.module.css";
-
+import database from "../../db/firebase";
 export default function Contact({ handleClose }) {
   const recaptchaKey = process.env.REACT_APP_RECAPTCHA;
+
   let [message, setMessage] = useState("");
   let [name, setName] = useState("");
   let [email, setEmail] = useState("");
@@ -20,7 +22,8 @@ export default function Contact({ handleClose }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const messageCollection = [];
+
+    const messageCollection = database.ref(`portfolioApp/messages`);
     messageCollection
       .push({
         name,
@@ -28,12 +31,45 @@ export default function Contact({ handleClose }) {
         phone,
       })
       .then(() => {
-        handleReset();
         setMessageSent(true);
+      })
+      .then(() => {
+        handleReset();
       })
       .catch((e) => {
         console.log("failed", e);
       });
+  };
+  const MessageSentModal = () => {
+    return (
+      <Modal
+        className={`${styles.modal__root}`}
+        isOpen={messageSent}
+        onRequestClose={() => {
+          setMessageSent(false);
+        }}
+      >
+        <div>
+          <h2>{`Hi ${name}, your message was sent.`}</h2>
+        </div>
+        <div>
+          <p>
+            I will do my best to response as soon as I can. In the mean time
+            stay safe and enjoy your day!
+          </p>
+        </div>
+        <div>
+          <button
+            className={`${styles.contact__button} ${styles.contact__button__close}`}
+            onClick={() => {
+              setMessageSent(false);
+            }}
+          >
+            close
+          </button>
+        </div>
+      </Modal>
+    );
   };
   useEffect(() => {
     setMessageSent(false);
@@ -50,14 +86,14 @@ export default function Contact({ handleClose }) {
       <div>
         <div className={styles.button__close}>
           <div>
-            {handleClose && (
+            {handleClose ? (
               <button
                 className={`${styles.contact__button} ${styles.contact__button__close}`}
                 onClick={handleClose}
               >
                 Close
               </button>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
@@ -129,6 +165,7 @@ export default function Contact({ handleClose }) {
             <div id="recaptchaVerification">
               <Recaptcha sitekey={recaptchaKey} />
             </div>
+            <MessageSentModal />
             <div>
               {approved ? (
                 <button
@@ -146,12 +183,6 @@ export default function Contact({ handleClose }) {
                   <strike>Send</strike>
                 </button>
               )}
-              {/* <button
-                className={`${styles.contact__button} ${styles.contact__button__reset}`}
-                onClick={handleReset}
-              >
-                Reset
-              </button> */}
             </div>
           </form>
         </div>

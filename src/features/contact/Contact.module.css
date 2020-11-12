@@ -14,23 +14,23 @@ input {
 }
 .contact__button {
   border: none;
-  color: #f7f7f7;
+  color: white;
   padding: 15px 32px;
   margin: 0.2rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 .contact__button:hover {
   border: none;
-  color: #f7f7f7;
+  color: white;
   padding: 15px 32px;
   margin: 0.2rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
 
 form {
@@ -43,32 +43,11 @@ form {
   justify-self: flex-end;
 }
 .contact__button__send {
-  background: #ff416c; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #ff4b2b,
-    #ff416c
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #ff4b2b,
-    #ff416c
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  background-color: transparent;
   transition: background-color 500ms;
 }
 .contact__button__send:hover {
-  background-color: #ed213a; /* fallback for old browsers */
-  background-color: -webkit-linear-gradient(
-    to right,
-    #93291e,
-    #ed213a
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background-color: linear-gradient(
-    to right,
-    #93291e,
-    #ed213a
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #ef3f5a;
 }
 .contact__button__reset {
   background-color: #ef3f5a;
@@ -84,7 +63,19 @@ form {
 .contact__button__close:hover {
   background-color: #d73851;
 }
-
+.modal__root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-grow: 1;
+  background-color: #292b2c;
+  color: #f7f7f7;
+  padding: 2rem;
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+}
 @media only screen and (max-device-width: 600px) {
   .root {
     margin: 0.2rem;

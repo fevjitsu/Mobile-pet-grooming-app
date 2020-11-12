@@ -1,4 +1,8 @@
-import * as firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
+
+// import * as firebase from "firebase";
 //connect to the database in this file
 //that way other files in this project
 //will be able to use this file to
