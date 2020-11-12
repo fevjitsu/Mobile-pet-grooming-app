@@ -8,7 +8,6 @@ export const contactSlice = createSlice({
     userName: "",
     email: "",
     phone: "",
-    address: "",
   },
   reducers: {
     showContact: (state) => {
@@ -26,9 +25,6 @@ export const contactSlice = createSlice({
     setContactPhone: (state, action) => {
       state.phone = action.payload;
     },
-    setContactAddress: (state, action) => {
-      state.address = action.payload;
-    },
   },
 });
 
@@ -38,12 +34,10 @@ export const {
   setContactEmail,
   setContactPhone,
   setContactUserName,
-  setContactAddress,
 } = contactSlice.actions;
 export const selectViewContact = (state) => state.contact.viewContact;
 export const selectUserName = (state) => state.contact.userName;
 export const selectEmail = (state) => state.contact.email;
 export const selectPhone = (state) => state.contact.phone;
 
-export const selectAddress = (state) => state.contact.address;
 export default contactSlice.reducer;

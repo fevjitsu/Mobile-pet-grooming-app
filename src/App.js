@@ -1,228 +1,164 @@
-import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { Component } from "react";
 import "./App.css";
-import Contact from "./features/forms/Contact";
-import {
-  selectViewContact,
-  showContact,
-  hideContact,
-} from "./features/forms/contactSlice";
-function App() {
-  let contactViewSelector = useSelector(selectViewContact);
-  let [viewContact, setViewContact] = useState(false);
-  let [viewServices, setViewServices] = useState(false);
-
-  let dispatch = useDispatch();
-  useEffect(() => {
-    if (contactViewSelector === true) {
-      setViewContact(true);
-      setViewServices(false);
-    } else {
-      setViewContact(false);
-    }
-  }, [contactViewSelector]);
-  const LeftBanner = () => {
-    return (
-      <div id="banner__content__left" className="banner__contents">
-        <div
-          id="banner__left__title"
-          className="animate__animated animate__backInLeft"
-        >
-          Mobile Pet Grooming
-        </div>
-        <div
-          id="banner__left__subTitle"
-          className="animate__animated animate__backInLeft"
-        >
-          We'll come to you!
-        </div>
-        <div className="buttons__container">
-          {viewContact ? null : (
-            <div>
-              <button
-                onClick={() => {
-                  dispatch(showContact());
-                  setViewServices(false);
-                }}
-                data-micron="pop"
-                className="button hvr-grow "
-              >
-                Contact
-              </button>
-            </div>
-          )}
-
-          {viewServices ? null : (
-            <div>
-              <button
-                onClick={() => {
-                  setViewServices(true);
-                  dispatch(hideContact());
-                }}
-                data-micron="pop"
-                className="button hvr-grow "
-              >
-                Services
-              </button>
-            </div>
-          )}
-        </div>
-        {viewContact || viewServices ? null : (
-          <div className="banner_image">
-            <img
-              onClick={() => {
-                setViewServices(true);
-                dispatch(hideContact());
-              }}
-              data-micron="pop"
-              className="cat__image center  hvr-grow"
-              src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fcat2.png?alt=media&token=542f9fca-44a0-475f-a0a5-3ed940269f8d"
-              alt="cat"
-            />
-          </div>
-        )}
-
-        {viewContact ? (
-          <div className="animate__animated animate__fadeIn">
-            <Contact />
-          </div>
-        ) : null}
-
-        {viewServices ? (
-          <div className="animate__animated animate__fadeIn">
-            <div>
-              <div className="price__text">Grooming prices</div>
-              <div className="price__text">Pet grooming within city: $25</div>
-            </div>
-            <div>
-              <button
-                className="button-secondary"
-                onClick={() => {
-                  setViewServices(false);
-                }}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        ) : null}
-      </div>
-    );
+import PageContent from "./features/pageContent/PageContent";
+export default class App extends Component {
+  state = {
+    home: true,
+    contact: false,
+    about: false,
+    services: false,
+    pages: [
+      {
+        title: "Home",
+        subTitle: "Voluptate commodo enim ipsum aliquip elit excepteur aute.",
+        paragraphs: [
+          "Amet labore irure consectetur quis labore pariatur qui amet proident pariatur minim eiusmod. Ea amet excepteur pariatur Lorem in et ut ex incididunt anim quis amet est id. Qui consequat mollit enim quis quis laboris fugiat ullamco. Reprehenderit tempor do adipisicing ex dolore tempor deserunt pariatur ut consequat fugiat nisi.",
+          "Sit esse qui minim aliqua ipsum irure et proident fugiat fugiat. Consectetur aute do mollit non nulla. Irure tempor consequat commodo tempor excepteur est laboris. Et sunt tempor laboris ad nisi eu ea excepteur quis dolore. Lorem id culpa laborum tempor laboris cillum enim velit eu fugiat exercitation mollit commodo consequat. Ea enim do fugiat cillum nulla commodo. Quis ipsum officia nulla officia excepteur esse eu anim cillum nostrud nostrud irure irure.",
+        ],
+        // image: {
+        //   src:
+        //     "https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fcat1.png?alt=media&token=475eaae5-13b2-44f0-9562-c4e5de90b79b",
+        //   alt: "cat photo",
+        // },
+        buttons: [
+          {
+            buttonName: "button one",
+            handleClick: function () {
+              alert("Handle click 1");
+            },
+          },
+          {
+            buttonName: "button two",
+            handleClick: function () {
+              alert("Handle click 2");
+            },
+          },
+          {
+            buttonName: "button three",
+            handleClick: function () {
+              alert("Handle click 3");
+            },
+          },
+        ],
+      },
+      {
+        title: "Services",
+        subTitle: "Commodo fugiat magna irure duis ea.",
+        paragraphs: [
+          "Amet labore irure consectetur quis labore pariatur qui amet proident pariatur minim eiusmod. Ea amet excepteur pariatur Lorem in et ut ex incididunt anim quis amet est id. Qui consequat mollit enim quis quis laboris fugiat ullamco. Reprehenderit tempor do adipisicing ex dolore tempor deserunt pariatur ut consequat fugiat nisi.",
+          "Sit esse qui minim aliqua ipsum irure et proident fugiat fugiat. Consectetur aute do mollit non nulla. Irure tempor consequat commodo tempor excepteur est laboris. Et sunt tempor laboris ad nisi eu ea excepteur quis dolore. Lorem id culpa laborum tempor laboris cillum enim velit eu fugiat exercitation mollit commodo consequat. Ea enim do fugiat cillum nulla commodo. Quis ipsum officia nulla officia excepteur esse eu anim cillum nostrud nostrud irure irure.",
+        ],
+        // image: {
+        //   src:
+        //     "https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fcat1.png?alt=media&token=475eaae5-13b2-44f0-9562-c4e5de90b79b",
+        //   alt: "cat photo",
+        // },
+        // buttons: [
+        //   {
+        //     buttonName: "Click me",
+        //     handleClick: function () {
+        //       alert("Handle click");
+        //     },
+        //   },
+        // ],
+      },
+      {
+        title: "Lets connect",
+        subTitle:
+          "Laborum proident officia labore duis ullamco incididunt est do occaecat consequat exercitation ullamco minim quis.",
+        paragraphs: [
+          "Amet labore irure consectetur quis labore pariatur qui amet proident pariatur minim eiusmod. Ea amet excepteur pariatur Lorem in et ut ex incididunt anim quis amet est id. Qui consequat mollit enim quis quis laboris fugiat ullamco. Reprehenderit tempor do adipisicing ex dolore tempor deserunt pariatur ut consequat fugiat nisi.",
+          "Sit esse qui minim aliqua ipsum irure et proident fugiat fugiat. Consectetur aute do mollit non nulla. Irure tempor consequat commodo tempor excepteur est laboris. Et sunt tempor laboris ad nisi eu ea excepteur quis dolore. Lorem id culpa laborum tempor laboris cillum enim velit eu fugiat exercitation mollit commodo consequat. Ea enim do fugiat cillum nulla commodo. Quis ipsum officia nulla officia excepteur esse eu anim cillum nostrud nostrud irure irure.",
+        ],
+        // image: {
+        //   src:
+        //     "https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fcat1.png?alt=media&token=475eaae5-13b2-44f0-9562-c4e5de90b79b",
+        //   alt: "cat photo",
+        // },
+        // buttons: [
+        //   {
+        //     buttonName: "Click me",
+        //     handleClick: function () {
+        //       alert("Handle click");
+        //     },
+        //   },
+        // ],
+      },
+      {
+        title: "About us",
+        subTitle: "Id anim tempor tempor irure voluptate.",
+        paragraphs: [
+          "Amet labore irure consectetur quis labore pariatur qui amet proident pariatur minim eiusmod. Ea amet excepteur pariatur Lorem in et ut ex incididunt anim quis amet est id. Qui consequat mollit enim quis quis laboris fugiat ullamco. Reprehenderit tempor do adipisicing ex dolore tempor deserunt pariatur ut consequat fugiat nisi.",
+          "Sit esse qui minim aliqua ipsum irure et proident fugiat fugiat. Consectetur aute do mollit non nulla. Irure tempor consequat commodo tempor excepteur est laboris. Et sunt tempor laboris ad nisi eu ea excepteur quis dolore. Lorem id culpa laborum tempor laboris cillum enim velit eu fugiat exercitation mollit commodo consequat. Ea enim do fugiat cillum nulla commodo. Quis ipsum officia nulla officia excepteur esse eu anim cillum nostrud nostrud irure irure.",
+        ],
+        // image: {
+        //   src:
+        //     "https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fcat1.png?alt=media&token=475eaae5-13b2-44f0-9562-c4e5de90b79b",
+        //   alt: "cat photo",
+        // },
+        // buttons: [
+        //   {
+        //     buttonName: "Click me",
+        //     handleClick: function () {
+        //       alert("Handle click");
+        //     },
+        //   },
+        // ],
+      },
+    ],
   };
 
-  const RightBanner = () => {
+  renderHome = () => {
+    this.setState({ home: true });
+    this.setState({ contact: false });
+    this.setState({ services: false });
+    this.setState({ about: false });
+  };
+  renderServices = () => {
+    this.setState({ home: false });
+    this.setState({ contact: false });
+    this.setState({ services: true });
+    this.setState({ about: false });
+  };
+  renderContact = () => {
+    this.setState({ home: false });
+    this.setState({ contact: true });
+    this.setState({ services: false });
+    this.setState({ about: false });
+  };
+  renderAbout = () => {
+    this.setState({ home: false });
+    this.setState({ contact: false });
+    this.setState({ services: false });
+    this.setState({ about: true });
+  };
+  render() {
     return (
-      <div id="banner__content__right" className="banner__contents">
-        <div
-          id="banner__right__title"
-          className="animate__animated animate__bounce"
-        >
-          You care for your furry baby.
-        </div>
-        <div
-          id="banner__right__subTitle"
-          className="animate__animated animate__bounce"
-        >
-          <strong>
-            <em>Let them look as great as you make them feel on the inside!</em>
-          </strong>
-        </div>
+      <div>
+        <nav>
+          <ul>
+            <li id="nav__ul__li__home" onClick={this.renderHome}>
+              Home
+            </li>
+            <li id="nav__ul__li__services" onClick={this.renderServices}>
+              Services
+            </li>
+            <li id="nav__ul__li__contact" onClick={this.renderContact}>
+              Contact
+            </li>
+            <li id="nav__ul__li__about" onClick={this.renderAbout}>
+              About
+            </li>
+          </ul>
+        </nav>
 
-        <p>
-          <hr />
-          Caring for our four legged friends is our top priority. We love our
-          furry ones unconditionally and we show it in the care we provide.
-        </p>
-        <div className="banner__content__right__image__container">
-          <div>
-            <div className="animate__animated animate__wobble animate__animated delay">
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fbrush.png?alt=media&token=68b16408-ca58-4169-8bd8-dd9ba4ed04eb"
-                alt="hair brush"
-              />
-            </div>
-          </div>
-          <div>
-            <div>
-              <img
-                className="animate__animated paw-1 animate__animated animate__fadeIn animate__animated animate__fadeOut animate__animated paws "
-                src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2FFrame%208paw.png?alt=media&token=0499df0b-dc54-44f1-8165-bbd0df151edc"
-                alt="animal
-                paw"
-              />
-              <img
-                className="animate__animated paw-2 animate__animated animate__fadeIn animate__animated animate__fadeOut animate__animated paws "
-                src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2FFrame%208paw.png?alt=media&token=0499df0b-dc54-44f1-8165-bbd0df151edc"
-                alt="animal
-                paw"
-              />
-            </div>
-            <div>
-              <img
-                className="animate__animated paw-3 animate__animated animate__fadeIn animate__animated animate__fadeOut animate__animated paws "
-                src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2FFrame%208paw.png?alt=media&token=0499df0b-dc54-44f1-8165-bbd0df151edc"
-                alt="animal
-                paw"
-              />
-              <img
-                className="animate__animated paw-4 animate__animated animate__fadeIn animate__animated animate__fadeOut animate__animated paws "
-                src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2FFrame%208paw.png?alt=media&token=0499df0b-dc54-44f1-8165-bbd0df151edc"
-                alt="animal
-                paw"
-              />
-            </div>
-            <div>
-              <img
-                className="animate__animated paw-5 animate__animated animate__fadeIn animate__animated animate__fadeOut animate__animated paws "
-                src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2FFrame%208paw.png?alt=media&token=0499df0b-dc54-44f1-8165-bbd0df151edc"
-                alt="animal
-                paw"
-              />
-            </div>
-          </div>
+        <div className="container">
+          {this.state.home && <PageContent {...this.state.pages[0]} />}
+          {this.state.services && <PageContent {...this.state.pages[1]} />}
+          {this.state.contact && <PageContent {...this.state.pages[2]} />}
+          {this.state.about && <PageContent {...this.state.pages[3]} />}
         </div>
       </div>
     );
-  };
-  const CenterBanner = () => {
-    return (
-      <div id="center__banner">
-        <div className="banner_image ">
-          <img
-            onClick={() => {
-              setViewServices(true);
-              dispatch(hideContact());
-            }}
-            data-micron="pop"
-            className="cat__image center hvr-grow"
-            src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fcat1.png?alt=media&token=475eaae5-13b2-44f0-9562-c4e5de90b79b"
-            alt="cat"
-          />
-        </div>
-        {/* <div className="banner_image">
-          <img
-            onClick={() => {
-              setViewServices(true);
-              dispatch(hideContact());
-            }}
-            data-micron="pop"
-            className="cat__image center hvr-grow"
-            src="https://firebasestorage.googleapis.com/v0/b/portfolio-231ae.appspot.com/o/images%2Fcat2.png?alt=media&token=542f9fca-44a0-475f-a0a5-3ed940269f8d"
-            alt="cat"
-          />
-        </div> */}
-      </div>
-    );
-  };
-  return (
-    <div className="App">
-      <div className="banner">
-        <div className="banner__left">{LeftBanner()}</div>
-        <div className="banner__center">{CenterBanner()}</div>
-        <div className="banner__right">{RightBanner()}</div>
-      </div>
-    </div>
-  );
+  }
 }
-
-export default App;
